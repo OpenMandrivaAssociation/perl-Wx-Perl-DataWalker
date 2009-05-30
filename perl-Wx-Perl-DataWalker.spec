@@ -11,7 +11,10 @@ Group:      Development/Perl
 Url:        http://search.cpan.org/dist/%{upstream_name}
 Source0:    http://www.cpan.org/modules/by-module/Wx/%{upstream_name}-%{upstream_version}.tar.gz
 
-
+BuildRequires: perl(Class::XSAccessor)
+BuildRequires: perl(Devel::Size)
+BuildRequires: perl(Wx)
+BuildRequires: perl(YAML::XS)
 BuildArch: noarch
 BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}
 
