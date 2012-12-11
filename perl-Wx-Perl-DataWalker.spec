@@ -1,22 +1,22 @@
 %define upstream_name    Wx-Perl-DataWalker
 %define upstream_version 0.02
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 3
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	2
 
-Summary:    Perl extension for blah blah blah
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/Wx/%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	Perl extension for blah blah blah
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/Wx/%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl(Class::XSAccessor)
-BuildRequires: perl(Devel::Size)
-BuildRequires: perl(Wx)
-BuildRequires: perl(YAML::XS)
-BuildArch: noarch
-BuildRoot:  %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:	perl-devel
+BuildRequires:	perl(Class::XSAccessor)
+BuildRequires:	perl(Devel::Size)
+BuildRequires:	perl(Wx)
+BuildRequires:	perl(YAML::XS)
+BuildArch:	noarch
 
 %description
 'Wx::Perl::DataWalker' implements a 'Wx::Frame' subclass that shows a
@@ -35,23 +35,28 @@ data structure using 'Devel::Size'.
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
-make test
+# requires GTK display
+#make test
 
 %install
-rm -rf %buildroot
 %makeinstall_std
 
-%clean
-rm -rf %buildroot
-
 %files
-%defattr(-,root,root)
 %doc Changes
 %{_mandir}/man3/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
 
+%changelog
+* Sat May 30 2009 Jérôme Quelin <jquelin@mandriva.org> 0.20.0-1mdv2010.0
++ Revision: 381372
+- adding missing buildrequires:
+- import perl-Wx-Perl-DataWalker
+
+
+* Sat May 30 2009 cpan2dist 0.02-1mdv
+- initial mdv release, generated with cpan2dist
 
